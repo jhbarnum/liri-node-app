@@ -109,6 +109,7 @@ function doWhatItSays() {
   	console.log(iWantIt);
   	input = 'spotify-this-song'
   	inputTwo = iWantIt;
+  	inputFour = iWantIt;
   	spotifyThisSong();
   	});
 }	
