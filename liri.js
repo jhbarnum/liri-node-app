@@ -5,8 +5,12 @@ var Spotify = require('node-spotify-api');
 var request = require("request");
 var client = new Twitter(keys.twitter);
 var spotify = new Spotify(keys.spotify);
+
 var input = process.argv[2];
 var inputTwo = process.argv[3];
+var inputThree = process.argv.splice(3, process.argv.length - 1);
+var inputFour = JSON.stringify(inputThree.join(" "));
+//fruits.join("");
 function myTweets() {
 	var params = {screen_name: 'DrumRVA', count: 20};
 	client.get('statuses/user_timeline', params, function(error, tweets, response){
@@ -32,10 +36,11 @@ function spotifyThisSong() {
 				console.log("Song: " + data.tracks.items[0].name);
 				console.log("Preview: " + data.tracks.items[0].preview_url);
 				console.log("Album: " + data.tracks.items[0].album.name);
+				console.log("---------------------");
 			}
 		});
 	} else {
-		spotify.search({ type: 'track', query: inputTwo }, function(err, data) {
+		spotify.search({ type: 'track', query: inputFour }, function(err, data) {
   			if (err) {
     			return console.log('Error occurred: ' + err);
   			}
@@ -45,6 +50,7 @@ function spotifyThisSong() {
 				console.log("Song: " + data.tracks.items[0].name);
 				console.log("Preview: " + data.tracks.items[0].preview_url);
 				console.log("Album: " + data.tracks.items[0].album.name);
+				console.log("---------------------");
 			}
 		});
 	}
@@ -60,17 +66,18 @@ function movieThis() {
 				}
 			console.log("---------------------");
 			var data = JSON.parse(body);
-			console.log(data.Title);
-			console.log(data.Year);
-			console.log(data.Ratings[0].Value);
-			console.log(data.Ratings[1].Value);
-			console.log(data.Country);
-			console.log(data.Language);
-			console.log(data.Plot);
-			console.log(data.Actors);		
+			console.log("Title: " + data.Title);
+			console.log("Year: " + data.Year);
+			console.log("IMDB Rating: " + data.Ratings[0].Value);
+			console.log("Rotten Tomato Rating: " + data.Ratings[1].Value);
+			console.log("Produced in: " + data.Country);
+			console.log("Language: " + data.Language);
+			console.log("Plot: " + data.Plot);
+			console.log("Actors: " + data.Actors);
+			console.log("---------------------");		
 		});
 	} else {
-		var queryUrl = "http://www.omdbapi.com/?t=" + inputTwo + "&y=&plot=short&apikey=trilogy";
+		var queryUrl = "http://www.omdbapi.com/?t=" + inputFour + "&y=&plot=short&apikey=trilogy";
 		var request = require("request");
 		request(queryUrl,(error, response, body) => {	
  			if (error) {
@@ -79,14 +86,15 @@ function movieThis() {
 			}
 			console.log("---------------------");
 			var data = JSON.parse(body);
-			console.log(data.Title);
-			console.log(data.Year);
-			console.log(data.Ratings[0].Value);
-			console.log(data.Ratings[1].Value);
-			console.log(data.Country);
-			console.log(data.Language);
-			console.log(data.Plot);
-			console.log(data.Actors);		
+			console.log("Title: " + data.Title);
+			console.log("Year: " + data.Year);
+			console.log("IMDB Rating: " + data.Ratings[0].Value);
+			console.log("Rotten Tomato Rating: " + data.Ratings[1].Value);
+			console.log("Produced in: " + data.Country);
+			console.log("Language: " + data.Language);
+			console.log("Plot: " + data.Plot);
+			console.log("Actors: " + data.Actors);
+			console.log("---------------------");
 		});
 	}
 }
