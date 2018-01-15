@@ -26,7 +26,7 @@ function myTweets() {
 }
 function spotifyThisSong() {
 	if (input == 'spotify-this-song' && inputTwo == undefined){
-		spotify.search({ type: 'track', query: 'Blackened' }, function(err, data) {
+		spotify.search({ type: 'track', query: 'The Sign, Ace of Base' }, function(err, data) {
   			if (err) {
     			return console.log('Error occurred: ' + err);
   			}
