@@ -5,17 +5,15 @@ var Spotify = require('node-spotify-api');
 var request = require("request");
 var client = new Twitter(keys.twitter);
 var spotify = new Spotify(keys.spotify);
-
 var input = process.argv[2];
 var inputTwo = process.argv[3];
 var inputThree = process.argv.splice(3, process.argv.length - 1);
 var inputFour = JSON.stringify(inputThree.join(" "));
-//fruits.join("");
+// function to display my last 20 tweets
 function myTweets() {
 	var params = {screen_name: 'DrumRVA', count: 20};
 	client.get('statuses/user_timeline', params, function(error, tweets, response){
     if (error) console.error(error);
-
     if (!error)
     	for (var i = 0; i < 20; i++) {
     	console.log("---------------------");
@@ -24,6 +22,7 @@ function myTweets() {
     	}
 	});
 }
+// function to get info on any song you want
 function spotifyThisSong() {
 	if (input == 'spotify-this-song' && inputTwo == undefined){
 		spotify.search({ type: 'track', query: 'The Sign, Ace of Base' }, function(err, data) {
@@ -55,6 +54,7 @@ function spotifyThisSong() {
 		});
 	}
 }
+// function to get info on any movie you want
 function movieThis() {
 	if (input == 'movie-this' && inputTwo == undefined){
 		var queryUrl = "http://www.omdbapi.com/?t=" + "Mr. Nobody" + "&y=&plot=short&apikey=trilogy";
@@ -98,6 +98,7 @@ function movieThis() {
 		});
 	}
 }
+//function to fs require and read data from another file
 function doWhatItSays() {
 	var fs = require("fs");
 	fs.readFile("random.txt", "utf8", function(error, data) {
@@ -112,7 +113,8 @@ function doWhatItSays() {
   	inputFour = iWantIt;
   	spotifyThisSong();
   	});
-}	
+}
+// function calls depending on input	
 if (input == 'my-tweets') {
 	myTweets();
 }
